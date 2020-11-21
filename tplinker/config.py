@@ -2,7 +2,7 @@ import string
 import random
 
 common = {
-    "exp_name": "webnlg_star",
+    "exp_name": "nyt_star",
     "rel2id": "rel2id.json",
     "device_num": 1,
 #     "encoder": "BiLSTM",
@@ -23,13 +23,13 @@ train_config = {
     "train_data": "train_data.json",
     "valid_data": "valid_data.json",
     "rel2id": "rel2id.json",
-    "logger": "wandb", # if wandb, comment the following four lines
+    # "logger": "wandb", # if wandb, comment the following four lines
     
 #     # if logger is set as default, uncomment the following four lines
-#     "logger": "default", 
-#     "run_id": run_id,
-#     "log_path": "./default_log_dir/default.log",
-#     "path_to_save_model": "./default_log_dir/{}".format(run_id),
+    "logger": "default", 
+    "run_id": run_id,
+    "log_path": "./tplinker/default_log_dir/default.log",
+    "path_to_save_model": "./tplinker/default_log_dir/{}".format(run_id),
 
     # only save the model state dict if F1 score surpasses <f1_2_save>
     "f1_2_save": 0, 
@@ -38,10 +38,10 @@ train_config = {
     # write down notes here if you want, it will be logged 
     "note": "start from scratch",
     # if not fr scratch, set a model_state_dict
-    "model_state_dict_path": "",
+    "model_state_dict_path": "./tplinker/default_log_dir",
     "hyper_parameters": {
         "batch_size": 6,
-        "epochs": 100,
+        "epochs": 50,
         "seed": 2333,
         "log_interval": 10,
         "max_seq_len": 100,
@@ -52,14 +52,14 @@ train_config = {
 }
 
 eval_config = {
-    "model_state_dict_dir": "./default_log_dir", # if use wandb, set "./wandb", or set "./default_log_dir" if you use default logger
-    "run_ids": ["DGKhEFlH", ],
+    "model_state_dict_dir": "./tplinker/default_log_dir", # if use wandb, set "./wandb", or set "./default_log_dir" if you use default logger
+    "run_ids": ["4wfIVy6U", ],
     "last_k_model": 1,
     "test_data": "*test*.json", # "*test*.json"
     
     # where to save results
     "save_res": False,
-    "save_res_dir": "../results",
+    "save_res_dir": "./results",
     
     # score: set true only if test set is annotated with ground truth
     "score": True,
@@ -67,14 +67,14 @@ eval_config = {
     "hyper_parameters": {
         "batch_size": 32,
         "force_split": False,
-        "max_test_seq_len": 512,
+        "max_test_seq_len": 128,
         "sliding_len": 50,
     },
 }
 
 bert_config = {
-    "data_home": "../data4bert",
-    "bert_path": "../../pretrained_models/bert-base-cased",
+    "data_home": "/home/ubuntu/repos/data/data4tplinker/data4bert/",
+    "bert_path": "/home/ubuntu/repos/data/pretrained_emb_models/pretrained_models/bert-base-cased",
     "hyper_parameters": {
         "lr": 5e-5,
     },
